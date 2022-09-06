@@ -1,9 +1,9 @@
 console.log('Yo!')
 
-const colors = ['red', 'green', 'blue']
+const colors = ['#f9db21']
 const startBtn = document.querySelector('#start')
 const screens = document.querySelectorAll('.screen')
-const timeList = document.querySelector('.time-btn')
+const timeList = document.querySelector('.time-list')
 const timeEl = document.querySelector('#time')
 const board = document.querySelector('#board')
 
@@ -11,7 +11,7 @@ let time = 0
 let score = 0
 
 
-startBtn.addEventListener('click', (event) => {
+startBtn.addEventListener('click', event => {
     event.preventDefault()
     screens[0].classList.add('up')
 })
@@ -57,7 +57,7 @@ function setTime(value) {
 
 function finishGame() {
     timeEl.parentNode.classList.add('hide')
-    board.innerHTML = `<h1>U Score: <span class="primary">${score}</span></h1>`
+    board.innerHTML = `<h1 class="score">U Score: <span class="primary">${score}</span></h1>`
 }
 
 function createRandomCircle() {
@@ -68,13 +68,12 @@ function createRandomCircle() {
     const y = getRandomNumber(0, height - size)
 
 
-    circle.classList.add('circle')
     setColor(circle)
+    circle.classList.add('circle')
     circle.style.width = `${size}px`
     circle.style.height = `${size}px`
     circle.style.left = `${x}px`
     circle.style.top = `${y}px`
-
     board.append(circle)
 }
 
@@ -84,10 +83,13 @@ function getRandomNumber(min, max) {
 
 function setColor(element) {
     const color = getRandomColor()
-    element.style.backgroundColor = color
+    element.style.background = color
+    element.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`
 }
 
 function getRandomColor() {
     const index = Math.floor(Math.random() * colors.length)
     return colors[index]
 }
+
+// Сделать кнопку домой и реплей
